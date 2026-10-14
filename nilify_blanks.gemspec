@@ -6,14 +6,14 @@ Gem::Specification.new do |s|
   s.license     = "MIT"
   s.author      = "Ben Hughes"
   s.email       = "me@benhughes.name"
-  s.homepage    = "https://github.com/rubiety/nilify_blanks"
+  s.homepage    = "https://github.com/eigenben/nilify_blanks"
   s.summary     = "Auto-convert blank fields to nil."
   s.description = "Often times you'll end up with empty strings where you really want nil at the database level.  This plugin automatically converts blanks to nil and is configurable."
 
   s.metadata = {
-    "source_code_uri"       => "https://github.com/rubiety/nilify_blanks",
-    "changelog_uri"         => "https://github.com/rubiety/nilify_blanks/blob/master/CHANGELOG.md",
-    "bug_tracker_uri"       => "https://github.com/rubiety/nilify_blanks/issues",
+    "source_code_uri"       => "https://github.com/eigenben/nilify_blanks",
+    "changelog_uri"         => "https://github.com/eigenben/nilify_blanks/blob/master/CHANGELOG.md",
+    "bug_tracker_uri"       => "https://github.com/eigenben/nilify_blanks/issues",
     "rubygems_mfa_required" => "true"
   }
 

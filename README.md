@@ -1,6 +1,6 @@
 # Nilify Blanks
 
-[![CI](https://github.com/rubiety/nilify_blanks/actions/workflows/ci.yml/badge.svg)](https://github.com/rubiety/nilify_blanks/actions/workflows/ci.yml)
+[![CI](https://github.com/eigenben/nilify_blanks/actions/workflows/ci.yml/badge.svg)](https://github.com/eigenben/nilify_blanks/actions/workflows/ci.yml)
 [![Gem Version](https://badge.fury.io/rb/nilify_blanks.svg)](https://rubygems.org/gems/nilify_blanks)
 
 In Rails when saving a model from a form and values are not provided by the user, an empty string is recorded to the database instead of a NULL as many would prefer (mixing blanks and NULLs can become confusing). This gem converts blank attributes to nil before a model is saved, either for every applicable column or for a list you choose.
