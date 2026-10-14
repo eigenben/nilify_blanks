@@ -2,3 +2,5 @@
 pkg
 *.gem
 spec/examples.txt
+Gemfile.lock
+gemfiles/*.lock
