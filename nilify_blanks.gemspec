@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
 
   s.metadata = {
     "source_code_uri"       => "https://github.com/eigenben/nilify_blanks",
-    "changelog_uri"         => "https://github.com/eigenben/nilify_blanks/blob/master/CHANGELOG.md",
+    "changelog_uri"         => "https://github.com/eigenben/nilify_blanks/blob/main/CHANGELOG.md",
     "bug_tracker_uri"       => "https://github.com/eigenben/nilify_blanks/issues",
     "rubygems_mfa_required" => "true"
   }
