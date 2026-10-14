@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.version     = NilifyBlanks::VERSION
   s.license     = "MIT"
   s.author      = "Ben Hughes"
-  s.email       = "ben@railsgarden.com"
+  s.email       = "me@benhughes.name"
   s.homepage    = "https://github.com/rubiety/nilify_blanks"
   s.summary     = "Auto-convert blank fields to nil."
   s.description = "Often times you'll end up with empty strings where you really want nil at the database level.  This plugin automatically converts blanks to nil and is configurable."
