@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.summary     = "Auto-convert blank fields to nil."
   s.description = "Often times you'll end up with empty strings where you really want nil at the database level.  This plugin automatically converts blanks to nil and is configurable."
 
-  s.files        = Dir["{lib,spec}/**/*", "[A-Z]*", "init.rb"]
+  s.files        = Dir["{lib,spec}/**/*", "[A-Z]*"]
   s.require_path = "lib"
 
   s.required_rubygems_version = ">= 1.3.4"

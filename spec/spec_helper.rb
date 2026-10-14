@@ -11,7 +11,8 @@ ActiveRecord::Base.establish_connection(config[ENV['DB'] || 'sqlite3'])
 # Load Test Schema into the Database
 load(File.dirname(__FILE__) + "/db/schema.rb")
 
-require File.dirname(__FILE__) + '/../init'
+require "nilify_blanks"
+NilifyBlanks::Railtie.insert
 
 RSpec.configure do |config|
   config.define_derived_metadata do |meta|
