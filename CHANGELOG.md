@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.0 (unreleased)
+## 2.0.0 (2026-10-14)
 
 * Require Rails 6.1+ and Ruby 2.7+ (tested on Rails 6.1 through 8.1)
 * RSpec matchers no longer define helper methods on every object, and drop RSpec 1/2 compatibility
