@@ -4,3 +4,4 @@ pkg
 spec/examples.txt
 Gemfile.lock
 gemfiles/*.lock
+.bundle

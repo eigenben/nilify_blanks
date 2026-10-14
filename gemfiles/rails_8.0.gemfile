@@ -1,0 +1,9 @@
+source "https://rubygems.org"
+
+gemspec path: ".."
+
+gem "activerecord", "~> 8.0.0"
+gem "activesupport", "~> 8.0.0"
+gem "rake", ">= 13.0"
+gem "rspec", "~> 3.13"
+gem "sqlite3", ">= 2.1"
