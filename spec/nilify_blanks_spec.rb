@@ -260,5 +260,24 @@ RSpec.describe NilifyBlanks do
         it { is_expected.to nilify_blanks }
       end
     end
+
+    describe "failure messages" do
+      it "names the column when nilify_blanks_for fails" do
+        matcher = nilify_blanks_for(:last_name)
+        expect(matcher.matches?(Post.new)).to be(false)
+        expect(matcher.failure_message).to eq("expected to nilify blanks for last_name")
+      end
+
+      it "includes options when they don't match" do
+        matcher = nilify_blanks_for(:title, before: :create)
+        expect(matcher.matches?(Post.new)).to be(false)
+        expect(matcher.failure_message).to start_with("expected to nilify blanks for title {")
+      end
+    end
+
+    it "does not define helper methods on every object" do
+      expect(Object.private_method_defined?(:failure_message_method)).to be(false)
+      expect(Object.private_method_defined?(:rspec_major_version)).to be(false)
+    end
   end
 end
