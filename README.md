@@ -67,6 +67,18 @@ class Post < ApplicationRecord
 end
 ```
 
+## Collections (Postgres arrays, hstore, json/jsonb)
+
+Empty arrays and hashes are left alone by default. Pass `collections: true` to turn an empty `Array` or `Hash` value into `nil` as well:
+
+```ruby
+class Post < ApplicationRecord
+  nilify_blanks collections: true
+end
+```
+
+This is generic: it applies to any selected column whose value is an `Array` or `Hash`, such as Postgres array, hstore, json and jsonb columns. With this option the default types also include `:json`, `:jsonb` and `:hstore`. Only empty collections are converted; elements inside a non-empty collection are never changed, so `["", "a"]` stays as it is. Postgres string array columns are already selected as `:string`, but arrays of other types (e.g. integer arrays) need `only:` or `types:`.
+
 ## Global Usage
 
 You can apply nilify_blanks to every model in your application:
@@ -146,7 +158,14 @@ bundle install
 bundle exec rake
 ```
 
-CI runs the suite against each supported Rails version using the gemfiles in `gemfiles/`. To run against one locally:
+The Postgres-only specs (array, hstore, json/jsonb) are skipped on SQLite. To run them, create a database and set `DB=postgresql` (connection settings come from `spec/db/database.yml`, overridable with `PGHOST`, `PGUSER` and `PGPASSWORD`):
+
+```
+createdb nilify_blanks_plugin_test
+DB=postgresql bundle exec rake
+```
+
+CI runs the suite against each supported Rails version using the gemfiles in `gemfiles/`, plus a Postgres job. To run against one locally:
 
 ```
 BUNDLE_GEMFILE=gemfiles/rails_7.2.gemfile bundle install

@@ -6,6 +6,7 @@ gem "activerecord", "~> 6.1.0"
 gem "activesupport", "~> 6.1.0"
 gem "rake", ">= 13.0"
 gem "rspec", "~> 3.13"
+gem "pg", ">= 1.5"
 gem "sqlite3", "~> 1.4"
 
 # Rails 6.1 and 7.0 predate these being removed from Ruby's default gems,

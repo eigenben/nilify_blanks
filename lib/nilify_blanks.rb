@@ -10,6 +10,7 @@ module NilifyBlanks
 
   module ClassMethods
     DEFAULT_TYPES = [:string, :text, :citext]
+    COLLECTION_TYPES = [:json, :jsonb, :hstore]
     DEFAULT_CALLBACK = :validation
 
     @@define_nilify_blank_methods_lock = Mutex.new
@@ -44,7 +45,7 @@ module NilifyBlanks
         options[:before] ||= DEFAULT_CALLBACK
         options[:only] = Array.wrap(options[:only]).map(&:to_s) if options[:only]
         options[:except] = Array.wrap(options[:except]).map(&:to_s) if options[:except]
-        options[:types] = options[:types] ? Array.wrap(options[:types]).map(&:to_sym) : DEFAULT_TYPES
+        options[:types] = options[:types] ? Array.wrap(options[:types]).map(&:to_sym) : DEFAULT_TYPES + (options[:collections] ? COLLECTION_TYPES : [])
 
         if options[:only]
           columns_to_nilify = options[:only].clone
@@ -64,9 +65,11 @@ module NilifyBlanks
   end
 
   def nilify_blanks
+    collections = nilify_blanks_options[:collections]
+
     (nilify_blanks_columns || []).each do |column|
       value = read_attribute(column)
-      next unless value.is_a?(String)
+      next unless value.is_a?(String) || (collections && (value.is_a?(Array) || value.is_a?(Hash)))
 
       write_attribute(column, nil) if value.blank?
     end

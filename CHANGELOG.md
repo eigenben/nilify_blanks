@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+* Add opt-in `collections: true` option to convert empty arrays and hashes (Postgres array, hstore, json and jsonb columns) to nil
+* Run specs against Postgres in CI
+
 ## 2.0.0 (2026-10-14)
 
 * Require Rails 6.1+ and Ruby 2.7+ (tested on Rails 6.1 through 8.1)

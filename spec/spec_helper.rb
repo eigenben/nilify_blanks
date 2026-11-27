@@ -3,9 +3,10 @@ require "rspec"
 require "active_support"
 require "active_record"
 require "yaml"
+require "erb"
 
 # Establish DB Connection
-config = YAML::load(IO.read(File.join(File.dirname(__FILE__), 'db', 'database.yml')))
+config = YAML::load(ERB.new(IO.read(File.join(File.dirname(__FILE__), 'db', 'database.yml'))).result)
 ActiveRecord::Base.establish_connection(config[ENV['DB'] || 'sqlite3'])
 
 # Load Test Schema into the Database
