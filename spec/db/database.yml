@@ -8,8 +8,9 @@ sqlite3:
 
 postgresql:
   adapter: postgresql
-  username: postgres
-  password: postgres
+  host: <%= ENV.fetch('PGHOST', 'localhost') %>
+  username: <%= ENV.fetch('PGUSER', 'postgres') %>
+  password: <%= ENV.fetch('PGPASSWORD', 'postgres') %>
   database: nilify_blanks_plugin_test
   min_messages: ERROR
 
