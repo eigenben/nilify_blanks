@@ -43,7 +43,7 @@ RSpec.describe NilifyBlanks do
     end
 
     it "should select hstore, json and jsonb columns with collections: true" do
-      expect(DocumentWithCollections.nilify_blanks_columns).to eq(['tags', 'properties', 'settings', 'metadata'])
+      expect(DocumentWithCollections.nilify_blanks_columns).to eq(['tags', 'scores', 'properties', 'settings', 'metadata'])
     end
 
     it "should leave empty collections alone by default" do
@@ -111,11 +111,25 @@ RSpec.describe NilifyBlanks do
       expect(document.tags).to eq(['', 'a'])
     end
 
-    it "should leave non-selected integer array columns alone" do
+    it "should convert empty integer arrays with collections: true" do
       document = DocumentWithCollections.new(scores: [])
       document.valid?
 
-      expect(document.scores).to eq([])
+      expect(document.scores).to be_nil
+    end
+
+    it "should not select integer arrays by default" do
+      expect(Document.nilify_blanks_columns).to_not include('scores')
+    end
+
+    it "should not select array columns outside an explicit types list" do
+      klass = Class.new(ActiveRecord::Base) do
+        self.table_name = "documents"
+        nilify_blanks types: [:text], collections: true
+      end
+      klass.new
+
+      expect(klass.nilify_blanks_columns).to eq([])
     end
 
     it "should convert empty collections in columns chosen with only" do

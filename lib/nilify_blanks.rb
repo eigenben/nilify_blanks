@@ -45,14 +45,18 @@ module NilifyBlanks
         options[:before] ||= DEFAULT_CALLBACK
         options[:only] = Array.wrap(options[:only]).map(&:to_s) if options[:only]
         options[:except] = Array.wrap(options[:except]).map(&:to_s) if options[:except]
-        options[:types] = options[:types] ? Array.wrap(options[:types]).map(&:to_sym) : DEFAULT_TYPES + (options[:collections] ? COLLECTION_TYPES : [])
+        explicit_types = options[:types] ? Array.wrap(options[:types]).map(&:to_sym) : nil
+        options[:types] = explicit_types || DEFAULT_TYPES + (options[:collections] ? COLLECTION_TYPES : [])
+        nilifiable = lambda do |column|
+          options[:types].include?(column.type) || (options[:collections] && !explicit_types && column.try(:array))
+        end
 
         if options[:only]
           columns_to_nilify = options[:only].clone
         elsif options[:nullables_only] == false
-          columns_to_nilify = self.columns.select {|c| options[:types].include?(c.type) }.map(&:name).map(&:to_s)
+          columns_to_nilify = self.columns.select(&nilifiable).map(&:name).map(&:to_s)
         else
-          columns_to_nilify = self.columns.select(&:null).select {|c| options[:types].include?(c.type) }.map(&:name).map(&:to_s)
+          columns_to_nilify = self.columns.select(&:null).select(&nilifiable).map(&:name).map(&:to_s)
         end
 
         columns_to_nilify -= options[:except] if options[:except]

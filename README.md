@@ -77,7 +77,7 @@ class Post < ApplicationRecord
 end
 ```
 
-This is generic: it applies to any selected column whose value is an `Array` or `Hash`, such as Postgres array, hstore, json and jsonb columns. With this option the default types also include `:json`, `:jsonb` and `:hstore`. Only empty collections are converted; elements inside a non-empty collection are never changed, so `["", "a"]` stays as it is. Postgres string array columns are already selected as `:string`, but arrays of other types (e.g. integer arrays) need `only:` or `types:`.
+This is generic: it applies to any selected column whose value is an `Array` or `Hash`, such as Postgres array, hstore, json and jsonb columns. With this option the default types also include `:json`, `:jsonb` and `:hstore`. Only empty collections are converted; elements inside a non-empty collection are never changed, so `["", "a"]` stays as it is. Array columns of any element type (e.g. integer arrays) are selected too. An explicit `types:` list is always respected.
 
 ## Global Usage
 
